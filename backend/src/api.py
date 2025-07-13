@@ -431,10 +431,23 @@ def get_statistics(session_id: str):
 async def simulate_custom_strategy(request: CustomStrategyRequest):
     """Run simulation with custom strategy parameters"""
     
+    # Convert card values from frontend format (2, 3, 4...) to backend format (TWO, THREE, FOUR...)
+    card_name_map = {
+        '2': 'TWO', '3': 'THREE', '4': 'FOUR', '5': 'FIVE',
+        '6': 'SIX', '7': 'SEVEN', '8': 'EIGHT', '9': 'NINE',
+        '10': 'TEN', 'J': 'JACK', 'Q': 'QUEEN', 'K': 'KING', 'A': 'ACE'
+    }
+    
+    converted_card_values = {}
+    for card, value in request.card_values.items():
+        card_upper = card.upper()
+        backend_card = card_name_map.get(card_upper, card_upper)
+        converted_card_values[backend_card] = value
+    
     # Build strategy config
     config = {
         'counting': {
-            'card_values': request.card_values,
+            'card_values': converted_card_values,
             'ace_adjustment': request.ace_adjustment
         },
         'betting': {
