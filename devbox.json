@@ -1,7 +1,5 @@
 {
   "packages": [
-    "python311",
-    "python311Packages.pip",
     "nodejs_20"
   ],
   "env": {
@@ -25,32 +23,32 @@
     ],
     "scripts": {
       "setup": [
-        "echo 'Creating Python virtual environment...'",
-        "python3.11 -m venv backend/venv",
-        "echo 'Installing Python dependencies...'",
-        "source backend/venv/bin/activate && pip install --upgrade pip",
-        "source backend/venv/bin/activate && pip install -r backend/requirements.txt",
+        "echo 'Building Docker images...'",
+        "docker build -t blackjack-backend ./backend",
+        "docker build -t blackjack-dev -f backend/Dockerfile.dev ./backend",
         "echo 'Installing Node dependencies...'",
         "cd frontend && npm install",
         "echo 'Setup complete!'"
       ],
       "backend": [
-        "cd backend && source venv/bin/activate && cd src && python api.py"
+        "echo 'Starting backend in Docker...'",
+        "docker build -t blackjack-backend ./backend",
+        "docker run -p 8000:8000 --rm blackjack-backend"
       ],
       "frontend": [
         "cd frontend && npm run dev"
       ],
       "start": [
-        "echo 'Starting Blackjack Simulator...'",
-        "devbox run backend &",
-        "BACKEND_PID=$!",
-        "sleep 2",
-        "devbox run frontend &",
-        "FRONTEND_PID=$!",
+        "echo 'Starting Blackjack Simulator with Docker...'",
+        "docker build -t blackjack-backend ./backend",
+        "docker run -d -p 8000:8000 --name blackjack-backend --rm blackjack-backend",
         "echo 'Backend running on http://localhost:8000'",
-        "echo 'Frontend running on http://localhost:3000'",
+        "sleep 3",
+        "cd frontend && npm run dev &",
+        "FRONTEND_PID=$!",
+        "echo 'Frontend running on http://localhost:5173'",
         "echo 'Press Ctrl+C to stop both servers'",
-        "trap 'kill $BACKEND_PID $FRONTEND_PID' INT",
+        "trap 'docker stop blackjack-backend; kill $FRONTEND_PID' INT",
         "wait"
       ],
       "test": [
@@ -65,63 +63,36 @@
         "cd ../frontend && npm run format"
       ],
       "simulate": [
-        "cd backend && source venv/bin/activate && cd src && python simulate_dad_strategy.py \"$@\""
+        "docker build -t blackjack-dev -f backend/Dockerfile.dev ./backend",
+        "docker run --rm -v $(pwd)/backend/src:/app/src blackjack-dev python /app/src/simulate_dad_strategy.py \"$@\""
       ],
       "simulate-quick": [
-        "cd backend && source venv/bin/activate && cd src && python simulate_dad_strategy.py --hands 10000"
+        "docker build -t blackjack-dev -f backend/Dockerfile.dev ./backend",
+        "docker run --rm -v $(pwd)/backend/src:/app/src blackjack-dev python /app/src/simulate_dad_strategy.py --hands 10000"
       ],
       "simulate-long": [
-        "cd backend && source venv/bin/activate && cd src && python simulate_dad_strategy.py --hands 1000000 --verbose"
+        "docker build -t blackjack-dev -f backend/Dockerfile.dev ./backend",
+        "docker run --rm -v $(pwd)/backend/src:/app/src blackjack-dev python /app/src/simulate_dad_strategy.py --hands 1000000 --verbose"
       ],
       "simulate-compare": [
-        "cd backend && source venv/bin/activate && cd src && python simulate_dad_strategy.py --compare --hands 100000"
+        "docker build -t blackjack-dev -f backend/Dockerfile.dev ./backend",
+        "docker run --rm -v $(pwd)/backend/src:/app/src blackjack-dev python /app/src/simulate_dad_strategy.py --compare --hands 100000"
       ],
       "optimize": [
-        "cd backend && source venv/bin/activate && cd src && python optimize_strategy.py \"$@\""
+        "docker build -t blackjack-dev -f backend/Dockerfile.dev ./backend",
+        "docker run --rm -v $(pwd)/backend/src:/app/src blackjack-dev python /app/src/optimize_strategy.py \"$@\""
       ],
       "optimize-quick": [
-        "cd backend && source venv/bin/activate && cd src && python optimize_strategy.py --quick --workers 2"
+        "docker build -t blackjack-dev -f backend/Dockerfile.dev ./backend",
+        "docker run --rm -v $(pwd)/backend/src:/app/src blackjack-dev python /app/src/optimize_strategy.py --quick --workers 2"
       ],
       "optimize-report": [
-        "cd backend && source venv/bin/activate && cd src && python generate_optimization_report.py"
+        "docker build -t blackjack-dev -f backend/Dockerfile.dev ./backend",
+        "docker run --rm -v $(pwd)/backend/src:/app/src blackjack-dev python /app/src/generate_optimization_report.py"
       ],
       "simulate-config": [
-        "cd backend && source venv/bin/activate && cd src && python simulate_with_config.py \"$@\""
-      ],
-      "docker-build": [
-        "echo 'Building Docker image...'",
-        "docker build -t blackjack-backend ./backend"
-      ],
-      "docker-run": [
-        "echo 'Running backend in Docker...'",
-        "docker run -p 8000:8000 --rm blackjack-backend"
-      ],
-      "docker-start": [
-        "echo 'Building and running backend in Docker...'",
-        "docker build -t blackjack-backend ./backend",
-        "echo 'Starting backend on http://localhost:8000'",
-        "docker run -p 8000:8000 --rm blackjack-backend &",
-        "DOCKER_PID=$!",
-        "sleep 3",
-        "echo 'Starting frontend on http://localhost:5173'",
-        "cd frontend && npm run dev &",
-        "FRONTEND_PID=$!",
-        "echo 'Press Ctrl+C to stop both servers'",
-        "trap 'docker stop $(docker ps -q --filter ancestor=blackjack-backend); kill $FRONTEND_PID' INT",
-        "wait"
-      ],
-      "docker-test": [
-        "echo 'Testing Docker build...'",
-        "docker build -t blackjack-backend ./backend",
-        "echo 'Running container...'",
-        "docker run -p 8000:8000 --rm -d blackjack-backend",
-        "echo 'Waiting for server to start...'",
-        "sleep 5",
-        "echo 'Testing API endpoint...'",
-        "curl http://localhost:8000",
-        "echo ''",
-        "echo 'Stopping container...'",
-        "docker stop $(docker ps -q --filter ancestor=blackjack-backend)"
+        "docker build -t blackjack-dev -f backend/Dockerfile.dev ./backend",
+        "docker run --rm -v $(pwd)/backend/src:/app/src blackjack-dev python /app/src/simulate_with_config.py \"$@\""
       ]
     }
   }

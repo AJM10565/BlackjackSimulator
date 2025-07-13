@@ -9,15 +9,6 @@
       "plugin_version": "0.0.2",
       "resolved": "github:NixOS/nixpkgs/c539ae8d21e49776966d714f82fba33b1fca78bc?narHash=sha256-zcGClfkXh4pckf4aGOZ18GFv73n1xHbdMWl17cPLouE%3D#nodejs_20",
       "source": "nixpkg"
-    },
-    "python311": {
-      "plugin_version": "0.0.4",
-      "resolved": "github:NixOS/nixpkgs/c539ae8d21e49776966d714f82fba33b1fca78bc?narHash=sha256-zcGClfkXh4pckf4aGOZ18GFv73n1xHbdMWl17cPLouE%3D#python311",
-      "source": "nixpkg"
-    },
-    "python311Packages.pip": {
-      "resolved": "github:NixOS/nixpkgs/c539ae8d21e49776966d714f82fba33b1fca78bc?narHash=sha256-zcGClfkXh4pckf4aGOZ18GFv73n1xHbdMWl17cPLouE%3D#python311Packages.pip",
-      "source": "nixpkg"
     }
   }
 }
