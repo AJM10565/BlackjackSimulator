@@ -87,6 +87,41 @@
       ],
       "simulate-config": [
         "cd backend && source venv/bin/activate && cd src && python simulate_with_config.py \"$@\""
+      ],
+      "docker-build": [
+        "echo 'Building Docker image...'",
+        "docker build -t blackjack-backend ./backend"
+      ],
+      "docker-run": [
+        "echo 'Running backend in Docker...'",
+        "docker run -p 8000:8000 --rm blackjack-backend"
+      ],
+      "docker-start": [
+        "echo 'Building and running backend in Docker...'",
+        "docker build -t blackjack-backend ./backend",
+        "echo 'Starting backend on http://localhost:8000'",
+        "docker run -p 8000:8000 --rm blackjack-backend &",
+        "DOCKER_PID=$!",
+        "sleep 3",
+        "echo 'Starting frontend on http://localhost:5173'",
+        "cd frontend && npm run dev &",
+        "FRONTEND_PID=$!",
+        "echo 'Press Ctrl+C to stop both servers'",
+        "trap 'docker stop $(docker ps -q --filter ancestor=blackjack-backend); kill $FRONTEND_PID' INT",
+        "wait"
+      ],
+      "docker-test": [
+        "echo 'Testing Docker build...'",
+        "docker build -t blackjack-backend ./backend",
+        "echo 'Running container...'",
+        "docker run -p 8000:8000 --rm -d blackjack-backend",
+        "echo 'Waiting for server to start...'",
+        "sleep 5",
+        "echo 'Testing API endpoint...'",
+        "curl http://localhost:8000",
+        "echo ''",
+        "echo 'Stopping container...'",
+        "docker stop $(docker ps -q --filter ancestor=blackjack-backend)"
       ]
     }
   }
