@@ -81,7 +81,9 @@ app.add_middleware(
         "http://localhost:3000", 
         "http://localhost:5173", 
         "https://blackjack-simulator-psi.vercel.app",
-        "https://*.vercel.app"
+        "https://blackjack-simulator-h28lq31fi-ajm10565s-projects.vercel.app",
+        "https://*.vercel.app",
+        "*"  # Allow all origins for now
     ],
     allow_credentials=True,
     allow_methods=["*"],
