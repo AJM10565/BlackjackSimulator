@@ -1,9 +1,0 @@
-services:
-  - type: web
-    name: blackjack-simulator-api
-    runtime: docker
-    dockerfilePath: ./backend/Dockerfile
-    dockerContext: ./backend
-    envVars:
-      - key: PORT
-        value: 8000
