@@ -1,0 +1,86 @@
+{
+  "counting": {
+    "card_values": {
+      "TWO": 0,
+      "THREE": 3,
+      "FOUR": 4,
+      "FIVE": 5,
+      "SIX": 3,
+      "SEVEN": 0,
+      "EIGHT": -1,
+      "NINE": -2,
+      "TEN": -3,
+      "JACK": -3,
+      "QUEEN": -3,
+      "KING": -3,
+      "ACE": -3
+    },
+    "ace_adjustment": 4
+  },
+  "betting": {
+    "count_threshold": 5,
+    "count_increment": 5,
+    "max_bet_units": 20
+  },
+  "deviations": {
+    "16_vs_10_stand": {
+      "player_total": 16,
+      "dealer_card": 10,
+      "action": "STAND",
+      "count_threshold": 0,
+      "comparison": "greater"
+    },
+    "12_vs_3_stand": {
+      "player_total": 12,
+      "dealer_card": 3,
+      "action": "STAND",
+      "count_threshold": 5,
+      "comparison": "greater_equal"
+    },
+    "12_vs_2_stand": {
+      "player_total": 12,
+      "dealer_card": 2,
+      "action": "STAND",
+      "count_threshold": 10,
+      "comparison": "greater_equal"
+    },
+    "13_vs_2_hit": {
+      "player_total": 13,
+      "dealer_card": 2,
+      "action": "HIT",
+      "count_threshold": -5,
+      "comparison": "less"
+    },
+    "13_vs_3_hit": {
+      "player_total": 13,
+      "dealer_card": 3,
+      "action": "HIT",
+      "count_threshold": -10,
+      "comparison": "less"
+    },
+    "11_vs_5_double": {
+      "player_total": 11,
+      "dealer_card": 5,
+      "action": "DOUBLE",
+      "count_threshold": 10,
+      "comparison": "greater"
+    },
+    "11_vs_6_double": {
+      "player_total": 11,
+      "dealer_card": 6,
+      "action": "DOUBLE",
+      "count_threshold": 10,
+      "comparison": "greater"
+    },
+    "88_vs_10_no_split": {
+      "player_total": 16,
+      "dealer_card": 10,
+      "action": "NO_SPLIT",
+      "count_threshold": 0,
+      "comparison": "greater"
+    }
+  },
+  "insurance": {
+    "ace_excess_threshold": 1.0
+  }
+}

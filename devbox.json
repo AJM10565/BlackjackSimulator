@@ -1,0 +1,93 @@
+{
+  "packages": [
+    "python311",
+    "python311Packages.pip",
+    "nodejs_20"
+  ],
+  "env": {
+    "PYTHONPATH": "$PYTHONPATH:$PWD/backend/src",
+    "BACKEND_PORT": "8000",
+    "FRONTEND_PORT": "3000"
+  },
+  "shell": {
+    "init_hook": [
+      "echo 'Welcome to Blackjack Simulator Dev Environment!'",
+      "echo 'Run `devbox run setup` to install all dependencies'",
+      "echo 'Run `devbox run start` to start both backend and frontend'",
+      "echo 'Run `devbox run backend` for backend only'",
+      "echo 'Run `devbox run frontend` for frontend only'",
+      "echo ''",
+      "echo 'Simulation commands:'",
+      "echo '  devbox run simulate [args]     - Run custom simulation'",
+      "echo '  devbox run simulate-quick      - Quick 10k hands test'",
+      "echo '  devbox run simulate-long       - Long 1M hands test'",
+      "echo '  devbox run simulate-compare    - Compare with basic strategy'"
+    ],
+    "scripts": {
+      "setup": [
+        "echo 'Creating Python virtual environment...'",
+        "python3.11 -m venv backend/venv",
+        "echo 'Installing Python dependencies...'",
+        "source backend/venv/bin/activate && pip install --upgrade pip",
+        "source backend/venv/bin/activate && pip install -r backend/requirements.txt",
+        "echo 'Installing Node dependencies...'",
+        "cd frontend && npm install",
+        "echo 'Setup complete!'"
+      ],
+      "backend": [
+        "cd backend && source venv/bin/activate && cd src && python api.py"
+      ],
+      "frontend": [
+        "cd frontend && npm run dev"
+      ],
+      "start": [
+        "echo 'Starting Blackjack Simulator...'",
+        "devbox run backend &",
+        "BACKEND_PID=$!",
+        "sleep 2",
+        "devbox run frontend &",
+        "FRONTEND_PID=$!",
+        "echo 'Backend running on http://localhost:8000'",
+        "echo 'Frontend running on http://localhost:3000'",
+        "echo 'Press Ctrl+C to stop both servers'",
+        "trap 'kill $BACKEND_PID $FRONTEND_PID' INT",
+        "wait"
+      ],
+      "test": [
+        "cd backend && python -m pytest tests/"
+      ],
+      "lint": [
+        "cd backend && python -m pylint src/",
+        "cd ../frontend && npm run lint"
+      ],
+      "format": [
+        "cd backend && python -m black src/",
+        "cd ../frontend && npm run format"
+      ],
+      "simulate": [
+        "cd backend && source venv/bin/activate && cd src && python simulate_dad_strategy.py \"$@\""
+      ],
+      "simulate-quick": [
+        "cd backend && source venv/bin/activate && cd src && python simulate_dad_strategy.py --hands 10000"
+      ],
+      "simulate-long": [
+        "cd backend && source venv/bin/activate && cd src && python simulate_dad_strategy.py --hands 1000000 --verbose"
+      ],
+      "simulate-compare": [
+        "cd backend && source venv/bin/activate && cd src && python simulate_dad_strategy.py --compare --hands 100000"
+      ],
+      "optimize": [
+        "cd backend && source venv/bin/activate && cd src && python optimize_strategy.py \"$@\""
+      ],
+      "optimize-quick": [
+        "cd backend && source venv/bin/activate && cd src && python optimize_strategy.py --quick --workers 2"
+      ],
+      "optimize-report": [
+        "cd backend && source venv/bin/activate && cd src && python generate_optimization_report.py"
+      ],
+      "simulate-config": [
+        "cd backend && source venv/bin/activate && cd src && python simulate_with_config.py \"$@\""
+      ]
+    }
+  }
+}

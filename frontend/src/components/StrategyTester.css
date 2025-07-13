@@ -1,0 +1,450 @@
+/* StrategyTester.css */
+
+.strategy-tester {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+}
+
+.strategy-tester h1 {
+  color: #1a1a1a;
+  text-align: center;
+  margin-bottom: 40px;
+  font-size: 2.5rem;
+}
+
+.strategy-tester h2 {
+  color: #2c3e50;
+  border-bottom: 2px solid #3498db;
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+}
+
+.strategy-tester h3 {
+  color: #34495e;
+  margin-bottom: 15px;
+  font-size: 1.2rem;
+}
+
+/* Configuration sections */
+.config-section {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 25px;
+  margin-bottom: 25px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Card values grid */
+.card-values-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  gap: 15px;
+  margin-top: 20px;
+}
+
+.card-value-input {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.card-value-input label {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #495057;
+  font-size: 1.1rem;
+}
+
+.card-value-input input {
+  width: 60px;
+  padding: 8px;
+  text-align: center;
+  border: 2px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.card-value-input input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Betting and simulation inputs */
+.betting-inputs,
+.simulation-inputs {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-group label {
+  font-weight: 600;
+  margin-bottom: 8px;
+  color: #495057;
+  font-size: 1rem;
+}
+
+.input-group input {
+  padding: 10px;
+  border: 2px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: #3498db;
+}
+
+/* Action buttons */
+.actions {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 30px 0;
+  flex-wrap: wrap;
+}
+
+.actions button {
+  padding: 12px 24px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  background-color: #6c757d;
+  color: white;
+}
+
+.actions button:hover:not(:disabled) {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+}
+
+.actions button.primary {
+  background-color: #28a745;
+  font-size: 1.2rem;
+  padding: 14px 32px;
+}
+
+.actions button.primary:hover:not(:disabled) {
+  background-color: #218838;
+}
+
+.actions button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Save configuration section */
+.save-config {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin: 20px 0;
+  align-items: center;
+}
+
+.save-config input {
+  padding: 10px 15px;
+  border: 2px solid #ced4da;
+  border-radius: 4px;
+  font-size: 1rem;
+  width: 300px;
+}
+
+.save-config button {
+  padding: 10px 20px;
+  background-color: #17a2b8;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.save-config button:hover:not(:disabled) {
+  background-color: #138496;
+}
+
+/* Saved configurations */
+.saved-configs {
+  background: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 8px;
+  padding: 20px;
+  margin: 20px 0;
+}
+
+.saved-config-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  margin-bottom: 10px;
+  background: white;
+  border: 1px solid #e9ecef;
+  border-radius: 4px;
+  transition: box-shadow 0.2s;
+}
+
+.saved-config-item:hover {
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.saved-config-item span {
+  font-weight: 600;
+  color: #495057;
+}
+
+.saved-config-item .timestamp {
+  font-weight: normal;
+  color: #6c757d;
+  font-size: 0.9rem;
+}
+
+.saved-config-item button {
+  padding: 6px 12px;
+  margin-left: 10px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 0.2s;
+}
+
+.saved-config-item button:first-of-type {
+  background-color: #007bff;
+  color: white;
+}
+
+.saved-config-item button:first-of-type:hover {
+  background-color: #0056b3;
+}
+
+.saved-config-item button:last-of-type {
+  background-color: #dc3545;
+  color: white;
+}
+
+.saved-config-item button:last-of-type:hover {
+  background-color: #c82333;
+}
+
+/* Results section */
+.results {
+  background: #e8f5e9;
+  border: 2px solid #4caf50;
+  border-radius: 8px;
+  padding: 30px;
+  margin-top: 30px;
+  animation: slideIn 0.5s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.results h2 {
+  color: #2e7d32;
+  border-bottom-color: #4caf50;
+}
+
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 20px;
+}
+
+.result-item {
+  background: white;
+  padding: 15px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+  text-align: center;
+}
+
+.result-item label {
+  display: block;
+  font-weight: 600;
+  color: #495057;
+  margin-bottom: 8px;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.result-item span {
+  display: block;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #212529;
+}
+
+.result-item span.positive {
+  color: #28a745;
+}
+
+.result-item span.negative {
+  color: #dc3545;
+}
+
+/* Bet distribution */
+.bet-distribution {
+  margin-top: 30px;
+  background: white;
+  padding: 20px;
+  border-radius: 6px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.distribution-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+  gap: 15px;
+  margin-top: 15px;
+}
+
+.distribution-item {
+  display: flex;
+  justify-content: space-between;
+  padding: 10px;
+  background: #f8f9fa;
+  border-radius: 4px;
+  font-size: 0.95rem;
+}
+
+.distribution-item span:first-child {
+  font-weight: 600;
+  color: #495057;
+}
+
+.distribution-item span:last-child {
+  color: #6c757d;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+  .strategy-tester {
+    padding: 15px;
+  }
+
+  .strategy-tester h1 {
+    font-size: 2rem;
+  }
+
+  .card-values-grid {
+    grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+    gap: 10px;
+  }
+
+  .betting-inputs,
+  .simulation-inputs {
+    grid-template-columns: 1fr;
+  }
+
+  .actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .save-config {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .save-config input {
+    width: 100%;
+  }
+
+  .results-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .saved-config-item {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .saved-config-item button {
+    margin-left: 0;
+  }
+}
+
+/* Loading state */
+.strategy-tester button:disabled {
+  position: relative;
+  overflow: hidden;
+}
+
+.strategy-tester button:disabled::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  to {
+    left: 100%;
+  }
+}
+
+/* Tooltips for help text (future enhancement) */
+.input-group {
+  position: relative;
+}
+
+.input-group[data-tooltip]:hover::after {
+  content: attr(data-tooltip);
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #333;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 4px;
+  font-size: 0.85rem;
+  white-space: nowrap;
+  z-index: 1000;
+  margin-bottom: 5px;
+}
+
+.input-group[data-tooltip]:hover::before {
+  content: '';
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border: 5px solid transparent;
+  border-top-color: #333;
+  margin-bottom: -5px;
+}

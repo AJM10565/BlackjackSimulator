@@ -1,0 +1,768 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Blackjack Strategy Optimization Report</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1, h2, h3 {
+            color: #333;
+        }
+        .summary {
+            background-color: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 20px 0;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: right;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            position: sticky;
+            top: 0;
+        }
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+        tr:hover {
+            background-color: #e8f4f8;
+        }
+        .positive {
+            color: green;
+            font-weight: bold;
+        }
+        .negative {
+            color: red;
+        }
+        .run-section {
+            margin: 30px 0;
+            padding: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+        }
+        .best-config {
+            background-color: #d4edda;
+            padding: 10px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .metric {
+            display: inline-block;
+            margin: 10px 20px 10px 0;
+        }
+        .metric-label {
+            font-weight: bold;
+            color: #666;
+        }
+        .metric-value {
+            font-size: 1.2em;
+            color: #333;
+        }
+        details {
+            margin: 10px 0;
+        }
+        summary {
+            cursor: pointer;
+            padding: 10px;
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+        summary:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+    <script>
+        function sortTable(tableId, columnIndex) {
+            var table = document.getElementById(tableId);
+            var rows = Array.from(table.getElementsByTagName('tr'));
+            var header = rows.shift();
+            
+            rows.sort(function(a, b) {
+                var aVal = parseFloat(a.cells[columnIndex].textContent);
+                var bVal = parseFloat(b.cells[columnIndex].textContent);
+                return bVal - aVal;
+            });
+            
+            table.innerHTML = '';
+            table.appendChild(header);
+            rows.forEach(row => table.appendChild(row));
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <h1>Blackjack Strategy Optimization Report</h1>
+        <p>Generated: 2025-07-12 23:32:41</p>
+        
+        <div class="summary">
+            <h2>Summary</h2>
+            <div class="metric">
+                <span class="metric-label">Total Optimization Runs:</span>
+                <span class="metric-value">3</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Total Configurations Tested:</span>
+                <span class="metric-value">46,567</span>
+            </div>
+            <div class="metric">
+                <span class="metric-label">Best ROI Found:</span>
+                <span class="metric-value positive">
+                    17.9600%
+                </span>
+            </div>
+        </div>
+
+        <div class="run-section">
+            <h2>Run #1 - 20250711_201210</h2>
+            
+            <div class="best-config">
+                <h3>Best Configuration</h3>
+                <div class="metric">
+                    <span class="metric-label">ROI:</span>
+                    <span class="metric-value negative">-0.7665%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Win Rate:</span>
+                    <span class="metric-value">44.14%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Final Bankroll:</span>
+                    <span class="metric-value">$2,125</span>
+                </div>
+                
+                <h4>Card Counting Values:</h4>
+                <p>
+                    2=0, 3=3, 4=3, 5=4, 
+                    6=4, 7=0, 8=0, 9=-3,
+                    10/J/Q/K=-3, A=-3
+                </p>
+                
+                <h4>Other Parameters:</h4>
+                <p>
+                    Ace Adjustment: 5,
+                    Betting Threshold: 3,
+                    Betting Increment: 5
+                </p>
+            </div>
+            
+            <details>
+                <summary>Top 10 Configurations (click to expand)</summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('table_0', 0)">ROI ↓</th>
+                            <th onclick="sortTable('table_0', 1)">Win Rate</th>
+                            <th>Card 3</th>
+                            <th>Card 4</th>
+                            <th>Card 5</th>
+                            <th>Card 6</th>
+                            <th>Card 8</th>
+                            <th>Card 9</th>
+                            <th>Ace Adj</th>
+                            <th>Bet Thresh</th>
+                            <th>Bet Incr</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_0">
+
+                        <tr>
+                            <td class="negative">-0.7665%</td>
+                            <td>44.14%</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-3</td>
+                            <td>5</td>
+                            <td>3</td>
+                            <td>5</td>
+                        </tr>
+
+                        <tr>
+                            <td class="negative">-0.7967%</td>
+                            <td>44.23%</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>-2</td>
+                            <td>-3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+
+                        <tr>
+                            <td class="negative">-0.8580%</td>
+                            <td>44.04%</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-3</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td>5</td>
+                        </tr>
+
+                        <tr>
+                            <td class="negative">-1.0006%</td>
+                            <td>44.13%</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>-3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>5</td>
+                        </tr>
+
+                        <tr>
+                            <td class="negative">-1.0200%</td>
+                            <td>44.18%</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>-2</td>
+                            <td>-1</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>7</td>
+                        </tr>
+
+                        <tr>
+                            <td class="negative">-1.0366%</td>
+                            <td>43.90%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>-2</td>
+                            <td>-2</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+
+                        <tr>
+                            <td class="negative">-1.0375%</td>
+                            <td>43.90%</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>-2</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>5</td>
+                        </tr>
+
+                        <tr>
+                            <td class="negative">-1.0393%</td>
+                            <td>43.88%</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>-2</td>
+                            <td>-2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="negative">-1.0424%</td>
+                            <td>44.12%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>-1</td>
+                            <td>-2</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="negative">-1.0502%</td>
+                            <td>44.06%</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>0</td>
+                            <td>-3</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>7</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </details>
+        </div>
+
+        <div class="run-section">
+            <h2>Run #2 - 20250711_201036</h2>
+            
+            <div class="best-config">
+                <h3>Best Configuration</h3>
+                <div class="metric">
+                    <span class="metric-label">ROI:</span>
+                    <span class="metric-value positive">17.9600%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Win Rate:</span>
+                    <span class="metric-value">47.20%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Final Bankroll:</span>
+                    <span class="metric-value">$12,245</span>
+                </div>
+                
+                <h4>Card Counting Values:</h4>
+                <p>
+                    2=0, 3=2, 4=3, 5=5, 
+                    6=4, 7=0, 8=0, 9=-1,
+                    10/J/Q/K=-3, A=-3
+                </p>
+                
+                <h4>Other Parameters:</h4>
+                <p>
+                    Ace Adjustment: 3,
+                    Betting Threshold: 6,
+                    Betting Increment: 7
+                </p>
+            </div>
+            
+            <details>
+                <summary>Top 10 Configurations (click to expand)</summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('table_1', 0)">ROI ↓</th>
+                            <th onclick="sortTable('table_1', 1)">Win Rate</th>
+                            <th>Card 3</th>
+                            <th>Card 4</th>
+                            <th>Card 5</th>
+                            <th>Card 6</th>
+                            <th>Card 8</th>
+                            <th>Card 9</th>
+                            <th>Ace Adj</th>
+                            <th>Bet Thresh</th>
+                            <th>Bet Incr</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_1">
+
+                        <tr>
+                            <td class="positive">17.9600%</td>
+                            <td>47.20%</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-1</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">16.2247%</td>
+                            <td>43.40%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>3</td>
+                            <td>-1</td>
+                            <td>-2</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">16.0769%</td>
+                            <td>44.10%</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-3</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">15.3150%</td>
+                            <td>46.50%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-1</td>
+                            <td>3</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">14.4417%</td>
+                            <td>48.70%</td>
+                            <td>2</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>-2</td>
+                            <td>-1</td>
+                            <td>3</td>
+                            <td>6</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">14.0021%</td>
+                            <td>44.20%</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-1</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">13.5270%</td>
+                            <td>46.90%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>-1</td>
+                            <td>-3</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">13.4078%</td>
+                            <td>46.60%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-2</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">12.8824%</td>
+                            <td>46.90%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>3</td>
+                            <td>-1</td>
+                            <td>-1</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">11.9240%</td>
+                            <td>46.10%</td>
+                            <td>2</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-1</td>
+                            <td>3</td>
+                            <td>4</td>
+                            <td>3</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </details>
+        </div>
+
+        <div class="run-section">
+            <h2>Run #3 - 20250711_200859</h2>
+            
+            <div class="best-config">
+                <h3>Best Configuration</h3>
+                <div class="metric">
+                    <span class="metric-label">ROI:</span>
+                    <span class="metric-value positive">16.7135%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Win Rate:</span>
+                    <span class="metric-value">45.30%</span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Final Bankroll:</span>
+                    <span class="metric-value">$12,975</span>
+                </div>
+                
+                <h4>Card Counting Values:</h4>
+                <p>
+                    2=0, 3=2, 4=5, 5=6, 
+                    6=4, 7=0, 8=-2, 9=-3,
+                    10/J/Q/K=-3, A=-3
+                </p>
+                
+                <h4>Other Parameters:</h4>
+                <p>
+                    Ace Adjustment: 4,
+                    Betting Threshold: 3,
+                    Betting Increment: 5
+                </p>
+            </div>
+            
+            <details>
+                <summary>Top 10 Configurations (click to expand)</summary>
+                <table>
+                    <thead>
+                        <tr>
+                            <th onclick="sortTable('table_2', 0)">ROI ↓</th>
+                            <th onclick="sortTable('table_2', 1)">Win Rate</th>
+                            <th>Card 3</th>
+                            <th>Card 4</th>
+                            <th>Card 5</th>
+                            <th>Card 6</th>
+                            <th>Card 8</th>
+                            <th>Card 9</th>
+                            <th>Ace Adj</th>
+                            <th>Bet Thresh</th>
+                            <th>Bet Incr</th>
+                        </tr>
+                    </thead>
+                    <tbody id="table_2">
+
+                        <tr>
+                            <td class="positive">16.7135%</td>
+                            <td>45.30%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>-2</td>
+                            <td>-3</td>
+                            <td>4</td>
+                            <td>3</td>
+                            <td>5</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">14.6585%</td>
+                            <td>47.50%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-1</td>
+                            <td>3</td>
+                            <td>5</td>
+                            <td>7</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">14.5889%</td>
+                            <td>43.60%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">14.2819%</td>
+                            <td>44.30%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>-1</td>
+                            <td>-3</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">14.2284%</td>
+                            <td>44.20%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>-1</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">13.2911%</td>
+                            <td>46.90%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>0</td>
+                            <td>-2</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">13.0936%</td>
+                            <td>48.40%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>2</td>
+                            <td>0</td>
+                            <td>-1</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">12.9461%</td>
+                            <td>42.50%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>-1</td>
+                            <td>-1</td>
+                            <td>4</td>
+                            <td>6</td>
+                            <td>3</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">12.5755%</td>
+                            <td>47.00%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>4</td>
+                            <td>-2</td>
+                            <td>-3</td>
+                            <td>4</td>
+                            <td>5</td>
+                            <td>7</td>
+                        </tr>
+
+                        <tr>
+                            <td class="positive">12.2172%</td>
+                            <td>46.20%</td>
+                            <td>2</td>
+                            <td>5</td>
+                            <td>5</td>
+                            <td>4</td>
+                            <td>-1</td>
+                            <td>-1</td>
+                            <td>5</td>
+                            <td>6</td>
+                            <td>7</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </details>
+        </div>
+
+        <div class="summary">
+            <h2>Overall Best Configuration</h2>
+            <div class="best-config">
+                <p><strong>Found in run:</strong> 20250711_201036</p>
+                <div class="metric">
+                    <span class="metric-label">ROI:</span>
+                    <span class="metric-value positive">
+                        17.9600%
+                    </span>
+                </div>
+                <div class="metric">
+                    <span class="metric-label">Win Rate:</span>
+                    <span class="metric-value">47.20%</span>
+                </div>
+                
+                <h3>Configuration Details:</h3>
+                <pre>{
+  "card_values": {
+    "two": "0",
+    "three": "2",
+    "four": "3",
+    "five": "5",
+    "six": "4",
+    "seven": "0",
+    "eight": "0",
+    "nine": "-1",
+    "ten_jack_queen_king": "-3",
+    "ace": "-3"
+  },
+  "ace_adjustment": "3",
+  "betting": {
+    "threshold": 6,
+    "increment": 7
+  }
+}</pre>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
