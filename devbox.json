@@ -52,7 +52,20 @@
         "wait"
       ],
       "test": [
-        "cd backend && python -m pytest tests/"
+        "docker build -t blackjack-test -f backend/Dockerfile.test ./backend",
+        "docker run --rm blackjack-test"
+      ],
+      "test-quick": [
+        "docker build -t blackjack-test -f backend/Dockerfile.test ./backend",
+        "docker run --rm blackjack-test python -m pytest tests/test_game_flow.py -v"
+      ],
+      "test-integration": [
+        "docker build -t blackjack-test -f backend/Dockerfile.test ./backend",
+        "docker run --rm blackjack-test python -m pytest tests/ -v --tb=short"
+      ],
+      "test-coverage": [
+        "docker build -t blackjack-test -f backend/Dockerfile.test ./backend",
+        "docker run --rm blackjack-test python -m pytest tests/ --cov=src --cov-report=term"
       ],
       "lint": [
         "cd backend && python -m pylint src/",
